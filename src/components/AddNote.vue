@@ -1,11 +1,16 @@
 <template>
   <div class="bg" @click.self="toggleAddNote">
-    <form class="form" @submit.prevent="submit" v-on:keyup.ctrl.enter="submit">
+    <form
+      class="form"
+      @submit.prevent="submit"
+      v-on:keyup.ctrl.enter.exact="submit"
+    >
       <h3>Add note</h3>
       <input
         class="form-title"
         type="text"
         placeholder="A few words about the note"
+        ref="inputTitle"
         v-model="title"
       />
       <textarea
@@ -17,7 +22,7 @@
         class="form-body"
       ></textarea>
       <div class="form-button">
-        <MyButton type="submit" :disabled="!valid">Submit</MyButton>
+        <MyButton type="submit">Submit</MyButton>
         <MyButton type="button" @click="toggleAddNote">Cancel</MyButton>
       </div>
     </form>
@@ -40,6 +45,9 @@ export default {
     onAdd: {
       type: Function,
     },
+    visibleAddNote: {
+      type: Boolean,
+    },
   },
   methods: {
     submit() {
@@ -55,10 +63,10 @@ export default {
       this.$emit("toggleAddNote");
     },
   },
-  computed: {
-    valid() {
-      return this.title && this.body;
-    },
+  mounted() {
+    setTimeout(() => {
+      this.$refs.inputTitle.focus();
+    }, 100);
   },
 };
 </script>
@@ -78,7 +86,6 @@ export default {
     align-items: center;
     margin: 20px auto;
     max-width: 800px;
-    height: 500px;
     border: 1px solid orange;
     border-radius: 10px;
     background: white;
@@ -107,6 +114,10 @@ export default {
     &-title,
     &-body {
       max-width: 350px;
+    }
+    &-body {
+      max-width: 350px;
+      height: 230px;
     }
   }
 }

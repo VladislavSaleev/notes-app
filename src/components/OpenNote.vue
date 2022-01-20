@@ -1,18 +1,23 @@
 <template>
   <div class="bg-fade" @click.self="$emit('toggle')">
-    <div class="notes" v-on:keyup.ctrl.enter="edit">
-      <input type="text" class="notes-title" v-model="editedNote.title" />
+    <div class="notes" v-on:keyup.ctrl.enter.exact="edit">
+      <input
+        type="text"
+        class="notes-title"
+        placeholder="A few words about the note"
+        v-model="editedNote.title"
+      />
       <textarea
         class="notes-body"
-        name=""
-        id=""
+        ref="textareaBody"
         cols="60"
         rows="27"
+        placeholder="And here is your important ideas"
         v-model="editedNote.body"
       ></textarea>
       <div class="notes-button">
         <MyButton @click="edit">Save</MyButton>
-        <MyButton @click="$emit('toggle')">Close</MyButton>
+        <MyButton @click="$emit('toggle')">Discard</MyButton>
       </div>
     </div>
   </div>
@@ -50,6 +55,11 @@ export default {
       };
       this.onEdit(edno);
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.$refs.textareaBody.focus();
+    }, 100);
   },
 };
 </script>
@@ -91,11 +101,21 @@ export default {
     }
   }
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1450px) {
   .notes {
-    &-title,
+    &-body {
+      height: 400px;
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .notes {
+    &-title {
+      max-width: 350px;
+    }
     &-body {
       max-width: 350px;
+      height: 230px;
     }
   }
 }

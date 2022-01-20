@@ -1,22 +1,28 @@
 <template>
   <div class="container">
     <NotesList :notes="notes" @deleteNote="deleteNote" @openNote="openNote" />
-    <transition name="fade">
+    <transition-group name="fade">
       <AddNote
         :onAdd="addNote"
+        :visibleAddNote="visibleAddNote"
         v-if="visibleAddNote"
         @toggleAddNote="toggleAddNote"
       />
-    </transition>
-    <transition name="fade">
       <OpenNote
         :selectedNote="selectedNote"
         v-if="visibleOpenNote"
-        @toggle="toggle"
+        @toggle="toggleOpenNote"
         :onEdit="editNote"
       />
-    </transition>
-    <button class="btn-add" @click="toggleAddNote">+</button>
+    </transition-group>
+    <RightPanel />
+    <button
+      class="btn-add"
+      @click.exact="toggleAddNote"
+      @click.ctrl.exact.stop="addEmptyNote"
+    >
+      +
+    </button>
   </div>
 </template>
 
@@ -24,12 +30,14 @@
 import NotesList from "@/components/NotesList";
 import AddNote from "@/components/AddNote";
 import OpenNote from "@/components/OpenNote";
+import RightPanel from "@/components/RightPanel";
 export default {
   name: "App",
   components: {
     NotesList,
     AddNote,
     OpenNote,
+    RightPanel,
   },
   data() {
     return {
@@ -44,6 +52,14 @@ export default {
       this.notes.push(note);
       this.toggleAddNote();
     },
+    addEmptyNote() {
+      const emptyNote = {
+        title: "",
+        body: "",
+        id: Date.now(),
+      };
+      this.notes.push(emptyNote);
+    },
     deleteNote(id) {
       this.notes = this.notes.filter((n) => n.id !== id);
     },
@@ -51,7 +67,7 @@ export default {
       this.selectedNote = this.notes.find((el) => el.id == id);
       this.visibleOpenNote = !this.visibleOpenNote;
     },
-    toggle() {
+    toggleOpenNote() {
       this.visibleOpenNote = !this.visibleOpenNote;
     },
     editNote(edno) {
@@ -77,6 +93,25 @@ export default {
     if (localStorage.storedNotes) {
       this.notes = JSON.parse(localStorage.getItem("storedNotes"));
     }
+    //listener for global keyboard shortcut commands
+    let keysPressed = {};
+    document.addEventListener("keydown", (event) => {
+      keysPressed[event.key] = true;
+      if (
+        keysPressed["Control"] &&
+        event.key == "Enter" &&
+        !this.visibleAddNote &&
+        !this.visibleOpenNote
+      ) {
+        this.toggleAddNote();
+      }
+      if (event.key == "Escape") {
+        this.visibleOpenNote = this.visibleAddNote = false;
+      }
+    });
+    document.addEventListener("keyup", (event) => {
+      keysPressed[event.key] = false;
+    });
   },
 };
 </script>
@@ -97,7 +132,7 @@ export default {
 }
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: baseline;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -117,6 +152,7 @@ export default {
     color: white;
     cursor: pointer;
     user-select: none;
+    z-index: 1;
     transition: all 0.3s linear;
     &:hover {
       border: 2px solid #2c3e50;

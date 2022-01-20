@@ -5,6 +5,7 @@
         v-for="note in notes"
         :key="note.id"
         :note="note"
+        class="note-animation-item"
         @openNote="$emit('openNote', note.id)"
         @deleteNote="$emit('deleteNote', note.id)"
       />
@@ -27,24 +28,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.note-animation-enter-active,
-.note-animation-leave-active {
+.note-animation-item {
   transition: all 0.6s ease;
 }
-
+.note-animation-leave-active {
+  position: fixed;
+  top: 0%;
+  right: 50%;
+}
 .note-animation-enter-from,
 .note-animation-leave-to {
   opacity: 0;
-  width: 0px;
-  height: 0px;
+  width: 80px;
+  height: 80px;
 }
 .list-wrapper {
   display: flex;
   flex-wrap: wrap;
   // border: 1px solid black;
-  width: 860px;
+  width: 1300px;
   min-height: 400px;
   margin: 10px;
   margin-top: 0;
+}
+@media screen and (max-width: 1450px) {
+  .list-wrapper {
+    width: 900px;
+  }
 }
 </style>

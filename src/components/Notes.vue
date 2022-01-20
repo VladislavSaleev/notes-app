@@ -22,26 +22,29 @@ export default {
 .note {
   display: block;
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 280px;
   padding: 5px;
   margin: 10px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
   cursor: pointer;
-  border: 2px solid green;
+  border: 2px solid rgb(148, 204, 148);
   border-radius: 5px;
+  background-color: rgb(249, 255, 227);
   user-select: none;
   &-title {
     margin: 5px;
-    padding-top: 13px;
+    margin-top: 20px;
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
   &-body {
     margin: 5px;
+    margin-top: 20px;
     white-space: pre-wrap;
   }
   .close {
@@ -50,11 +53,11 @@ export default {
     color: red;
     position: absolute;
     font-weight: bold;
-    top: 3px;
+    top: -3px;
+    right: -3px;
     border: none;
     border-radius: 25px;
-    background-color: white;
-    right: 3px;
+    background-color: transparent;
     width: 30px;
     height: 30px;
     font-size: 15px;
@@ -66,11 +69,21 @@ export default {
     }
   }
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1450px) {
   .note {
-    width: 155px;
-    height: 155px;
+    width: 190px;
+    height: 250px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .note {
+    width: 150px;
+    height: 210px;
     margin: 5px;
+    &-title,
+    &-body {
+      margin-top: 10px;
+    }
   }
 }
 </style>
