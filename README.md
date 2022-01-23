@@ -1,24 +1,4 @@
-# another-todo-list
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# notes-app
+## This is a simple app can create a new notes, edit existing ones, and ofc delete it.
+## Link: https://vladislavsaleev.github.io/notes-app/
+### All changes will be stored in localStorage, but i'm not recommend to keep here a important things, because it easy to erase
