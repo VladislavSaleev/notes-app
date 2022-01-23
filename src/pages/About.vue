@@ -1,8 +1,5 @@
 <template>
-  <div class="about">
-    а тут я рассказываю почему это было создано!))) или очередную кулстори
-    почему это приложение полезно..или немного обо мне....
-  </div>
+  <div class="about">Something about this APP.</div>
 </template>
 
 <script>
