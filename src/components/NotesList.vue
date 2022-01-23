@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss" scoped>
 .note-animation-item {
-  transition: all 0.6s ease;
+  transition: all 0.4s ease;
 }
 .note-animation-leave-active {
   position: fixed;
