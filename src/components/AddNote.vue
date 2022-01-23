@@ -22,19 +22,15 @@
         class="form-body"
       ></textarea>
       <div class="form-button">
-        <MyButton type="submit">Submit</MyButton>
-        <MyButton type="button" @click="toggleAddNote">Cancel</MyButton>
+        <my-button type="submit">Submit</my-button>
+        <my-button type="button" @click="toggleAddNote">Cancel</my-button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import MyButton from "@/components/UI/MyButton";
 export default {
-  components: {
-    MyButton,
-  },
   data() {
     return {
       title: "",

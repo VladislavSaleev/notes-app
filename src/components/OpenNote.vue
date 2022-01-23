@@ -16,19 +16,15 @@
         v-model="editedNote.body"
       ></textarea>
       <div class="notes-button">
-        <MyButton @click="edit">Save</MyButton>
-        <MyButton @click="$emit('toggle')">Discard</MyButton>
+        <my-button @click="edit">Save</my-button>
+        <my-button @click="$emit('toggle')">Discard</my-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import MyButton from "@/components/UI/MyButton";
 export default {
-  components: {
-    MyButton,
-  },
   props: {
     selectedNote: {
       type: Object,
