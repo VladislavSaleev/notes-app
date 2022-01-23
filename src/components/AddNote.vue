@@ -109,10 +109,16 @@ export default {
     }
   }
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1450px) {
   .form {
-    &-title,
     &-body {
+      height: 400px;
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .form {
+    &-title {
       max-width: 350px;
     }
     &-body {
