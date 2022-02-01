@@ -1,8 +1,8 @@
 <template>
-  <div class="wrapper" :style="{ right: visiblePanel ? '3px' : '-402px' }">
-    <MyButton class="btn-panel" @click="toggleVisiblePanel">{{
+  <div class="wrapper" :style="{ right: visiblePanel ? '3px' : '-401px' }">
+    <my-button class="btn-panel" @click="toggleVisiblePanel">{{
       visiblePanel ? "&#187;" : "&#171;"
-    }}</MyButton>
+    }}</my-button>
     <div class="panel">
       <div class="panel-hotkeys">
         <table>
@@ -73,16 +73,16 @@ export default {
   z-index: 1;
 }
 .btn-panel {
-  padding-bottom: 50px;
-  margin: 0;
+  margin: 0 1px;
   height: 50px;
   width: 50px;
-  font-size: 40px;
+  font-size: 45px;
+  line-height: 40px;
 }
 .panel {
   height: 450px;
   width: 400px;
-  border: 1px solid black;
+  // border: 1px solid black;
   &-hotkeys {
     display: flex;
     width: 100%;
@@ -90,13 +90,13 @@ export default {
     flex-direction: column;
     align-items: center;
     table {
-      background-color: rgb(243, 253, 206);
+      background-color: rgb(249, 255, 227);
       height: 100%;
       table-layout: fixed;
       border-collapse: collapse;
       border: 1px solid black;
       th {
-        background-color: rgb(198, 206, 161);
+        background-color: rgb(228, 250, 130);
         font-size: 20px;
       }
       td {

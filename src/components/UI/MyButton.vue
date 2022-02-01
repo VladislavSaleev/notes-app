@@ -14,7 +14,7 @@ export default {
 .my-btn {
   height: 30px;
   width: 70px;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: bold;
   background-color: rgb(237, 247, 109);
   border: 2px solid rgba(0, 0, 0, 0.2);

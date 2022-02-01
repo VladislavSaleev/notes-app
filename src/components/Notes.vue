@@ -34,23 +34,26 @@ export default {
   border: 2px solid rgb(148, 204, 148);
   border-radius: 5px;
   background-color: rgb(249, 255, 227);
+  box-shadow: 5px 5px 19px -15px;
   user-select: none;
   &-title {
     margin: 5px;
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
   &-body {
     margin: 5px;
-    margin-top: 20px;
+    margin-top: 10px;
     white-space: pre-wrap;
+    font-size: 16px;
+    line-height: 1.3;
   }
   .close {
     display: block;
     text-align: center;
-    color: red;
+    color: rgb(148, 204, 148);
     position: absolute;
     font-weight: bold;
     top: -3px;
@@ -64,15 +67,9 @@ export default {
     z-index: 1;
     transition: all 0.4s cubic-bezier(0.9, 0.42, 0.45, 0.74);
     &:hover {
-      color: rgb(91, 233, 86);
+      color: red;
       transform: rotate(180deg);
     }
-  }
-}
-@media screen and (max-width: 1450px) {
-  .note {
-    width: 190px;
-    height: 250px;
   }
 }
 @media screen and (max-width: 800px) {
@@ -83,6 +80,17 @@ export default {
     &-title,
     &-body {
       margin-top: 10px;
+    }
+  }
+}
+@media screen and (max-width: 370px) {
+  .note {
+    width: 130px;
+    height: 190px;
+    margin: 3px;
+    &-title,
+    &-body {
+      margin-top: 8px;
     }
   }
 }
