@@ -1,28 +1,35 @@
 <template>
   <header class="navbar">
-    <div class="navbar-logo" @click="$router.push('/')">Notes app</div>
+    <div
+      class="navbar-logo"
+      @click="$router.push('/')"
+    >
+      Notes app
+    </div>
+
     <div>
-      <my-button class="navbar-btn" @click="$router.push('/')">
+      <my-button
+        class="navbar-btn"
+        @click="$router.push('/')"
+      >
         Notes
       </my-button>
-      <my-button class="navbar-btn" @click="$router.push('/about')"
-        >About
+
+      <my-button
+        class="navbar-btn"
+        @click="$router.push('/about')"
+      >
+        About
       </my-button>
-      <my-button class="navbar-btn" @click="$router.push('/store')"
+      <!-- <my-button class="navbar-btn" @click="$router.push('/store')"
         >Store
-      </my-button>
+      </my-button> -->
     </div>
   </header>
 </template>
 
 <script>
-export default {
-  methods: {
-    test() {
-      console.log("hey");
-    },
-  },
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
@@ -41,6 +48,7 @@ export default {
   );
   box-shadow: 0px 5px 20px -15px;
   height: 55px;
+
   &-logo {
     height: 40px;
     width: 100px;
@@ -65,6 +73,7 @@ export default {
       margin: 0 5px 0 5px !important;
       width: 60px !important;
     }
+
     &-logo {
       margin-left: 2px;
       width: 80px;

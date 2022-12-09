@@ -2,12 +2,12 @@
   <div class="list-wrapper">
     <transition-group name="note-animation">
       <Notes
+        class="note-animation-item"
         v-for="note in notes"
         :key="note.id"
         :note="note"
-        class="note-animation-item"
-        @openNote="$emit('openNote', note.id)"
-        @deleteNote="$emit('deleteNote', note.id)"
+        @onOpenNote="$emit('on-open-note', note.id)"
+        @onDeleteNote="$emit('on-delete-note', note.id)"
       />
     </transition-group>
   </div>

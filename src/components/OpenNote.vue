@@ -1,9 +1,18 @@
 <template>
-  <div class="bg-fade" @click.self="$emit('toggle')">
-    <div class="notes" v-on:keyup.ctrl.enter.exact="edit">
+  <div
+    class="bg-fade"
+    @click.self="$emit('on-toggle-open-note-visible')"
+  >
+    <div
+      class="notes"
+      v-on:keyup.ctrl.enter.exact="edit"
+    >
       <header class="notes-header">
-        <h3>Edit note</h3>
+        <h3>
+          Edit note
+        </h3>
       </header>
+
       <input
         type="text"
         class="notes-title"
@@ -17,10 +26,16 @@
         rows="27"
         placeholder="And here is your important ideas"
         v-model="editedNote.body"
-      ></textarea>
+      />
+
       <div class="notes-button">
-        <my-button @click="edit">Save</my-button>
-        <my-button @click="$emit('toggle')">Discard</my-button>
+        <my-button @click="edit">
+          Save
+        </my-button>
+
+        <my-button @click="$emit('on-toggle-open-note-visible')">
+          Discard
+        </my-button>
       </div>
     </div>
   </div>
@@ -46,13 +61,13 @@ export default {
     };
   },
   methods: {
-    edit(edno) {
-      edno = {
+    edit(editedNote) {
+      editedNote = {
         title: this.editedNote.title,
         body: this.editedNote.body,
         id: this.selectedNote.id,
       };
-      this.onEdit(edno);
+      this.onEdit(editedNote);
     },
   },
   mounted() {

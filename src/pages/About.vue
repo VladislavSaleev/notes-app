@@ -1,8 +1,17 @@
 <template>
   <div>
-    <div class="about">Something about this APP.</div>
-    <div class="about">tudum ba dums..</div>
-    <div class="about animate">d o t h e s h a k e</div>
+    <div class="about">
+      Something about this APP.
+    </div>
+
+    <div class="about">
+      tudum ba dums..
+    </div>
+
+    <div class="about animate">
+      d o t h e s h a k e
+    </div>
+    
     <div class="about">
       <img
         class="img animate-reverse"
