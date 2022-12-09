@@ -1,24 +1,31 @@
 <template>
   <div class="container">
-    <NotesList :notes="notes" @deleteNote="deleteNote" @openNote="openNote" />
+    <NotesList
+      :notes="notes"
+      @on-delete-note="deleteNote"
+      @on-open-note="openNote"
+    />
+
     <transition-group name="fade">
       <AddNote
-        :onAdd="addNote"
-        :visibleAddNote="visibleAddNote"
-        v-if="visibleAddNote"
-        @toggleAddNote="toggleAddNote"
+        v-if="isVisibleAddNoteModal"
+        :on-add="addNote"
+        @on-toggle-add-note-visible="toggleAddNoteVisible"
       />
+
       <OpenNote
-        :selectedNote="selectedNote"
-        v-if="visibleOpenNote"
-        @toggle="toggleOpenNote"
-        :onEdit="editNote"
+        v-if="isVisibleOpenNoteModal"
+        :selected-note="selectedNote"
+        :on-edit="editNote"
+        @on-toggle-open-note-visible="toggleOpenNoteVisible"
       />
     </transition-group>
+    
     <RightPanel />
+
     <button
       class="btn-add"
-      @click.exact="toggleAddNote"
+      @click.exact="toggleAddNoteVisible"
       @click.ctrl.exact.stop="addEmptyNote"
     >
       +
@@ -31,6 +38,7 @@ import NotesList from "@/components/NotesList";
 import AddNote from "@/components/AddNote";
 import OpenNote from "@/components/OpenNote";
 import RightPanel from "@/components/RightPanel";
+
 export default {
   name: "App",
   components: {
@@ -39,19 +47,18 @@ export default {
     OpenNote,
     RightPanel,
   },
-
   data() {
     return {
       notes: [],
       selectedNote: {},
-      visibleOpenNote: false,
-      visibleAddNote: false,
+      isVisibleOpenNoteModal: false,
+      isVisibleAddNoteModal: false,
     };
   },
   methods: {
     addNote(note) {
       this.notes.push(note);
-      this.toggleAddNote();
+      this.toggleAddNoteVisible();
     },
     addEmptyNote() {
       const emptyNote = {
@@ -66,18 +73,18 @@ export default {
     },
     openNote(id) {
       this.selectedNote = this.notes.find((el) => el.id == id);
-      this.visibleOpenNote = !this.visibleOpenNote;
+      this.isVisibleOpenNoteModal = !this.isVisibleOpenNoteModal;
     },
-    toggleOpenNote() {
-      this.visibleOpenNote = !this.visibleOpenNote;
+    toggleOpenNoteVisible() {
+      this.isVisibleOpenNoteModal = !this.isVisibleOpenNoteModal;
     },
     editNote(edno) {
       const currIdx = this.notes.findIndex((el) => el.id == edno.id);
       this.notes.splice(currIdx, 1, edno);
-      this.visibleOpenNote = !this.visibleOpenNote;
+      this.isVisibleOpenNoteModal = !this.isVisibleOpenNoteModal;
     },
-    toggleAddNote() {
-      this.visibleAddNote = !this.visibleAddNote;
+    toggleAddNoteVisible() {
+      this.isVisibleAddNoteModal = !this.isVisibleAddNoteModal;
     },
   },
   watch: {
@@ -101,13 +108,13 @@ export default {
       if (
         keysPressed["Control"] &&
         event.key == "Enter" &&
-        !this.visibleAddNote &&
-        !this.visibleOpenNote
+        !this.isVisibleAddNoteModal &&
+        !this.isVisibleOpenNoteModal
       ) {
-        this.toggleAddNote();
+        this.toggleAddNoteVisible();
       }
       if (event.key == "Escape") {
-        this.visibleOpenNote = this.visibleAddNote = false;
+        this.isVisibleOpenNoteModal = this.isVisibleAddNoteModal = false;
       }
     });
     document.addEventListener("keyup", (event) => {
@@ -153,6 +160,7 @@ export default {
     user-select: none;
     z-index: 1;
     transition: all 0.3s linear;
+
     &:hover {
       border: 2px solid #2c3e50;
       color: #2c3e50;

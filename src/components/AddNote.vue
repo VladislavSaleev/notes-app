@@ -1,13 +1,16 @@
 <template>
-  <div class="bg" @click.self="toggleAddNote">
+  <div class="bg" @click.self="onToggleAddNoteVisible">
     <form
       class="form"
       @submit.prevent="submit"
       v-on:keyup.ctrl.enter.exact="submit"
     >
       <header class="form-header">
-        <h3>Create new note</h3>
+        <h3>
+          Create new note
+        </h3>
       </header>
+
       <input
         class="form-title"
         type="text"
@@ -15,17 +18,27 @@
         ref="inputTitle"
         v-model="title"
       />
+
       <textarea
+        class="form-body"
         placeholder="And here is your important ideas"
         cols="60"
         rows="27"
         wrap="soft"
         v-model="body"
-        class="form-body"
-      ></textarea>
+      />
+
       <div class="form-button">
-        <my-button type="submit">Submit</my-button>
-        <my-button type="button" @click="toggleAddNote">Cancel</my-button>
+        <my-button type="submit">
+          Submit
+        </my-button>
+
+        <my-button
+          type="button"
+          @click="onToggleAddNoteVisible"
+        >
+          Cancel
+        </my-button>
       </div>
     </form>
   </div>
@@ -43,9 +56,6 @@ export default {
     onAdd: {
       type: Function,
     },
-    visibleAddNote: {
-      type: Boolean,
-    },
   },
   methods: {
     submit() {
@@ -57,8 +67,8 @@ export default {
       this.onAdd(note);
       this.title = this.body = "";
     },
-    toggleAddNote() {
-      this.$emit("toggleAddNote");
+    onToggleAddNoteVisible() {
+      this.$emit("on-toggle-add-note-visible");
     },
   },
   mounted() {

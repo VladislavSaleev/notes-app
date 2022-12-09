@@ -1,10 +1,22 @@
 <template>
-  <div class="note" @click="$emit('openNote', note.id)">
-    <button class="close" @click.stop="$emit('deleteNote', note.id)">
+  <div
+    class="note"
+    @click="$emit('on-open-note', note.id)"
+  >
+    <button
+      class="close"
+      @click.stop="$emit('on-delete-note', note.id)"
+    >
       &#x2715;
     </button>
-    <h3 class="note-title">{{ note.title }}</h3>
-    <div class="note-body">{{ note.body }}</div>
+
+    <h3 class="note-title">
+      {{ note.title }}
+    </h3>
+    
+    <div class="note-body">
+      {{ note.body }}
+    </div>
   </div>
 </template>
 
@@ -36,6 +48,7 @@ export default {
   background-color: rgb(249, 255, 227);
   box-shadow: 5px 5px 19px -15px;
   user-select: none;
+
   &-title {
     margin: 5px;
     margin-top: 15px;
@@ -43,6 +56,7 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
   &-body {
     margin: 5px;
     margin-top: 10px;
@@ -66,6 +80,7 @@ export default {
     font-size: 15px;
     z-index: 1;
     transition: all 0.4s cubic-bezier(0.9, 0.42, 0.45, 0.74);
+
     &:hover {
       color: red;
       transform: rotate(180deg);
@@ -77,6 +92,7 @@ export default {
     width: 150px;
     height: 210px;
     margin: 5px;
+
     &-title,
     &-body {
       margin-top: 10px;
@@ -88,6 +104,7 @@ export default {
     width: 130px;
     height: 190px;
     margin: 3px;
+
     &-title,
     &-body {
       margin-top: 8px;

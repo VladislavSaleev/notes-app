@@ -1,8 +1,15 @@
 <template>
-  <div class="wrapper" :style="{ right: visiblePanel ? '3px' : '-401px' }">
-    <my-button class="btn-panel" @click="toggleVisiblePanel">{{
-      visiblePanel ? "&#187;" : "&#171;"
-    }}</my-button>
+  <div
+    class="wrapper"
+    :style="{ right: visiblePanel ? '3px' : '-401px' }"
+  >
+    <my-button
+      class="btn-panel"
+      @click="toggleVisiblePanel"
+    >
+      {{ visiblePanel ? "&#187;" : "&#171;" }}
+    </my-button>
+
     <div class="panel">
       <div class="panel-hotkeys">
         <table>
